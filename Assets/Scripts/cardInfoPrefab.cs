@@ -17,6 +17,7 @@ public class cardInfoPrefab : NetworkBehaviour
 
     // Référence à la base de données contenant toutes les cartes (ScriptableObject)
     public CardDataBase cardData;
+    public Button leButton;
 
     // Référence réseau du propriétaire de la carte (le joueur qui la possède)
     [Networked]
@@ -54,17 +55,8 @@ public class cardInfoPrefab : NetworkBehaviour
         if (OnTerrain) return;
 
         // Sinon on appelle la fonction réseau pour déplacer la carte sur le terrain
-        RPC_moveCard();
+        
     }
     
-    // RPC appelé par le propriétaire (InputAuthority) et reçu par tous (tout le monde synchronise)
-    [Rpc(RpcSources.InputAuthority, RpcTargets.All)]
-    void RPC_moveCard()
-    {
-        // Change le parent de la carte pour la déplacer dans la hiérarchie sous l’objet terrain (visible par tous)
-        gameObject.transform.SetParent(GameRef.Instance.terrain.transform);
-
-        // Marque la carte comme étant sur le terrain
-        OnTerrain = true;
-    }
+    
 }

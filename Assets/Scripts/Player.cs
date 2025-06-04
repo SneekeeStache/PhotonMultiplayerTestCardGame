@@ -85,12 +85,24 @@ public class Player : NetworkBehaviour
 
                 // Assigne le propriétaire de la carte (pour gérer la main, interaction, etc.)
                 cardInfo.owner = this.Object.InputAuthority;
+                cardInfo.leButton = obj.GetComponent<Button>();
+                cardInfo.leButton.onClick.AddListener(delegate
+                {
+                    pickCard(obj.gameObject);
+                    
+                });
             });
 
+        
         // Ajoute la carte dans la main réseau
         hand.Add(deck[cardId]);
 
         // Supprime la carte du deck réseau (elle est maintenant dans la main)
         deck.Remove(deck[cardId]);
+    }
+
+    public void pickCard(GameObject card)
+    {
+        GameRef.Instance.SelectManager.selectCard(card);
     }
 }
