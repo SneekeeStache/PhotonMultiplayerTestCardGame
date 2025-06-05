@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.GPUSort;
 using Random = UnityEngine.Random;
 
 public class Player : NetworkBehaviour
@@ -26,7 +27,9 @@ public class Player : NetworkBehaviour
 
     // Prefab de la carte à instancier
     [SerializeField] public GameObject cardTemplate;
-    
+
+    public CardDeck CardDeck; // Référence au deck de cartes du joueur (ScriptableObject) si utilisé et qu'on veutlui filer un deck spécifique et préconstruit
+
     // Méthode appelée une fois que l’objet réseau est spawné
     public override void Spawned()
     {
@@ -43,6 +46,11 @@ public class Player : NetworkBehaviour
 
             // Définit ce joueur comme le joueur local dans GameRef
             GameRef.Instance.LocalPlayer = this;
+
+            if (CardDeck != null)
+            {
+                InitializeDeck(CardDeck); // Initialise le deck de cartes du joueur avec le ScriptableObject CardDeck
+            }
 
             // Tire 2 cartes au début (appel local)
             DrawCard();
@@ -104,5 +112,22 @@ public class Player : NetworkBehaviour
     public void pickCard(GameObject card)
     {
         GameRef.Instance.SelectManager.selectCard(card);
+    }
+
+    public void InitializeDeck(CardDeck cardDeck)
+    {
+        if (cardDeck != null)
+        {
+            deck.Clear(); // Vide le deck actuel
+
+            foreach (cardData card in cardDeck.DeckCards)
+            {
+                deck.Add(card.id);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("CardDeck is null. Cannot initialize CardDeckHandler.");
+        }
     }
 }

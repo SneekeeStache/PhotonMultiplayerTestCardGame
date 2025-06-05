@@ -255,6 +255,7 @@ MonoBehaviour:
   playerUi: {fileID: 1476780352692650000}
   handUI: {fileID: 2470985206718166448}
   cardTemplate: {fileID: 845324734987500255, guid: 13b180e4a39e3564bbbfa2eb5fc03a64, type: 3}
+  CardDeck: {fileID: 11400000, guid: d93f51865e0b0314eaae5c6864f7fafa, type: 2}
 --- !u!114 &6384839139171621514
 MonoBehaviour:
   m_ObjectHideFlags: 0
