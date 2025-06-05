@@ -83,7 +83,7 @@ public class cardInfoPrefab : NetworkBehaviour
         RPC_ChangeState(newState);
     }
 
-    [Rpc(RpcSources.InputAuthority,RpcTargets.StateAuthority)]
+    [Rpc(RpcSources.All,RpcTargets.All)]
     public void RPC_ChangeState(state newState)
     {
         Event_OnStateChange.Invoke();
@@ -101,6 +101,7 @@ public class cardInfoPrefab : NetworkBehaviour
                 break;
             case state.Played:
                 Event_OnStateEnter_Played.Invoke();
+                changeState(state.OnTile);
                 break;
             case state.OnTile:
                 Event_OnStateEnter_OnTile.Invoke();

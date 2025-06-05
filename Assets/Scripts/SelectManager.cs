@@ -51,7 +51,7 @@ public class SelectManager : NetworkBehaviour
         RectTransform rectCard = myCard.GetComponent<RectTransform>();
         rectCard.anchorMin = new Vector2(0.5f, 0.5f);
         rectCard.anchorMax = new Vector2(0.5f, 0.5f);
-        cardSelected.changeState(cardInfoPrefab.state.OnTile);
+        cardScript.changeState(cardInfoPrefab.state.Played);
         
 
     }
