@@ -92,7 +92,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   indexCard: 0
-  OnTerrain: 0
+  Event_OnStateChange:
+    m_PersistentCalls:
+      m_Calls: []
+  Event_OnStateEnter_InHand:
+    m_PersistentCalls:
+      m_Calls: []
+  Event_OnStateEnter_Played:
+    m_PersistentCalls:
+      m_Calls: []
+  Event_OnStateEnter_OnTile:
+    m_PersistentCalls:
+      m_Calls: []
+  Event_OnStateEnter_Picked:
+    m_PersistentCalls:
+      m_Calls: []
+  Event_OnStateExit_InHand:
+    m_PersistentCalls:
+      m_Calls: []
+  Event_OnStateExit_Played:
+    m_PersistentCalls:
+      m_Calls: []
+  Event_OnStateExit_OnTile:
+    m_PersistentCalls:
+      m_Calls: []
+  Event_OnStateExit_Picked:
+    m_PersistentCalls:
+      m_Calls: []
+  networkObjectComponent: {fileID: 4046569453720758858}
+  buttonComponent: {fileID: 8854585015467740314}
+  _currentState: 0
   cardImage: {fileID: 1701098147342778271}
   cardData: {fileID: 0}
 --- !u!114 &8854585015467740314
@@ -138,19 +167,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1701098147342778271}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1738436647763984024}
-        m_TargetAssemblyTypeName: cardInfoPrefab, Assembly-CSharp
-        m_MethodName: testClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &4046569453720758858
 MonoBehaviour:
   m_ObjectHideFlags: 0

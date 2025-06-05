@@ -46,10 +46,12 @@ public class SelectManager : NetworkBehaviour
         
         Runner.TryFindObject(cardId,out NetworkObject myCard);
         Runner.TryFindObject(terrainId, out NetworkObject terrain);
+        cardInfoPrefab cardScript = myCard.gameObject.GetComponent<cardInfoPrefab>();
         myCard.gameObject.transform.SetParent(terrain.gameObject.transform);
         RectTransform rectCard = myCard.GetComponent<RectTransform>();
         rectCard.anchorMin = new Vector2(0.5f, 0.5f);
         rectCard.anchorMax = new Vector2(0.5f, 0.5f);
+        cardSelected.changeState(cardInfoPrefab.state.OnTile);
         
 
     }

@@ -132,6 +132,7 @@ public class cardInfoPrefab : NetworkBehaviour
 
     public void pickCard()
     {
+        if(currentState == state.OnTile) return;
         GameRef.Instance.SelectManager.selectCard(this);
     }
     
