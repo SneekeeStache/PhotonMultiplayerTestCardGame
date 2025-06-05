@@ -2,22 +2,48 @@ using System;
 using Fusion;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class cardInfoPrefab : NetworkBehaviour
 {
     // Identifiant de la carte (utilisé pour récupérer les données dans la base)
+    [Header("infoCard")]
     public int indexCard;
+    
+    [Header("events")]
+    public UnityEvent Event_OnStateChange;
+    
+    public UnityEvent Event_OnStateEnter_InHand;
+    public UnityEvent Event_OnStateEnter_Played;
+    public UnityEvent Event_OnStateEnter_OnTile;
+    public UnityEvent Event_OnStateEnter_Picked;
+    
+    public UnityEvent Event_OnStateExit_InHand;
+    public UnityEvent Event_OnStateExit_Played;
+    public UnityEvent Event_OnStateExit_OnTile;
+    public UnityEvent Event_OnStateExit_Picked;
+    
+    [Header("components")]
+    public NetworkObject networkObjectComponent;
+    public Button buttonComponent;
 
-    // Indique si la carte est posée sur le terrain (true) ou non (false)
-    public bool OnTerrain = false;
+    public enum state
+    {
+        InHand,
+        Picked,
+        Played,
+        OnTile,
+    };
+
+    [Networked]
+    public state currentState {get; set;}
 
     // Référence à l’image UI qui affiche le visuel de la carte
     public Image cardImage;
 
     // Référence à la base de données contenant toutes les cartes (ScriptableObject)
     public CardDataBase cardData;
-    public Button leButton;
 
     // Référence réseau du propriétaire de la carte (le joueur qui la possède)
     [Networked]
@@ -37,6 +63,8 @@ public class cardInfoPrefab : NetworkBehaviour
             Debug.Log("bug cardData");
         }
 
+        changeState(state.InHand);
+        
         // Définit le sprite de la carte en fonction de l’index dans la base de données
         cardImage.sprite = cardData.GetCardById(indexCard).visual;
 
@@ -46,17 +74,65 @@ public class cardInfoPrefab : NetworkBehaviour
             // Si trouvé, attache la carte dans la hiérarchie de la main du joueur (handUI)
             gameObject.transform.SetParent(player.handUI.transform);
         }
+
+        buttonComponent.onClick.AddListener(pickCard);
     }
 
-    // Fonction appelée quand on clique sur la carte (test)
-    public void testClick()
+    public void changeState(state newState)
     {
-        // Si la carte est déjà sur le terrain, on ne fait rien
-        if (OnTerrain) return;
-
-        // Sinon on appelle la fonction réseau pour déplacer la carte sur le terrain
-        
+        RPC_ChangeState(newState);
     }
-    
+
+    [Rpc(RpcSources.InputAuthority,RpcTargets.StateAuthority)]
+    public void RPC_ChangeState(state newState)
+    {
+        Event_OnStateChange.Invoke();
+        exitState();
+        currentState = newState;
+        enterState();
+    }
+
+    public void enterState()
+    {
+        switch (currentState)
+        {
+            case state.InHand:
+                Event_OnStateEnter_InHand.Invoke();
+                break;
+            case state.Played:
+                Event_OnStateEnter_Played.Invoke();
+                break;
+            case state.OnTile:
+                Event_OnStateEnter_OnTile.Invoke();
+                break;
+            case state.Picked:
+                Event_OnStateEnter_Picked.Invoke();
+                break;
+        }
+    }
+
+    public void exitState()
+    {
+        switch (currentState)
+        {
+            case state.InHand:
+                Event_OnStateExit_InHand.Invoke();
+                break;
+            case state.Played:
+                Event_OnStateExit_Played.Invoke();
+                break;
+            case state.OnTile:
+                Event_OnStateExit_OnTile.Invoke();
+                break;
+            case state.Picked:
+                Event_OnStateExit_Picked.Invoke();
+                break;
+        }
+    }
+
+    public void pickCard()
+    {
+        GameRef.Instance.SelectManager.selectCard(this);
+    }
     
 }

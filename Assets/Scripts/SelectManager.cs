@@ -5,18 +5,24 @@ using UnityEngine;
 public class SelectManager : NetworkBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public GameObject cardSelected;
+    public cardInfoPrefab cardSelected;
 
-    public void selectCard(GameObject card)
+    public void selectCard(cardInfoPrefab card)
     {
         Debug.Log("click card");
         if (cardSelected != card)
         {
+            if (cardSelected)
+            {
+                cardSelected.changeState(cardInfoPrefab.state.InHand);
+            }
             cardSelected = card;
             Debug.Log("selected");
+            card.changeState(cardInfoPrefab.state.Picked);
         }
         else
         {
+            cardSelected.changeState(cardInfoPrefab.state.InHand);
             cardSelected = null;
             Debug.Log("unselected");
         }
@@ -27,7 +33,7 @@ public class SelectManager : NetworkBehaviour
         Debug.Log("click terrain");
         if(cardSelected == null) return;
         NetworkObject monTerrain = terrain.GetComponent<NetworkObject>();
-        NetworkObject maCarte = cardSelected.GetComponent<NetworkObject>();
+        NetworkObject maCarte = cardSelected.networkObjectComponent;
         Debug.Log(monTerrain.Id.Raw);
         RPC_dropCard(monTerrain.Id,  maCarte.Id);
         cardSelected = null;
