@@ -97,17 +97,22 @@ public class cardInfoPrefab : NetworkBehaviour
         switch (currentState)
         {
             case state.InHand:
+                if(HasInputAuthority){}
                 Event_OnStateEnter_InHand.Invoke();
+                Debug.Log("enterState inhand");
                 break;
             case state.Played:
                 Event_OnStateEnter_Played.Invoke();
+                Debug.Log("enterState played");
                 changeState(state.OnTile);
                 break;
             case state.OnTile:
                 Event_OnStateEnter_OnTile.Invoke();
+                Debug.Log("enterState onTile");
                 break;
             case state.Picked:
                 Event_OnStateEnter_Picked.Invoke();
+                Debug.Log("enterState picked");
                 break;
         }
     }
@@ -118,15 +123,19 @@ public class cardInfoPrefab : NetworkBehaviour
         {
             case state.InHand:
                 Event_OnStateExit_InHand.Invoke();
+                Debug.Log("exitState inhand");
                 break;
             case state.Played:
                 Event_OnStateExit_Played.Invoke();
+                Debug.Log("exitState played");
                 break;
             case state.OnTile:
                 Event_OnStateExit_OnTile.Invoke();
+                Debug.Log("exitState onTile");
                 break;
             case state.Picked:
                 Event_OnStateExit_Picked.Invoke();
+                Debug.Log("exitState picked");
                 break;
         }
     }

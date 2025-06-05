@@ -36,7 +36,9 @@ public class SelectManager : NetworkBehaviour
         NetworkObject maCarte = cardSelected.networkObjectComponent;
         Debug.Log(monTerrain.Id.Raw);
         RPC_dropCard(monTerrain.Id,  maCarte.Id);
+        cardSelected.changeState(cardInfoPrefab.state.Played);
         cardSelected = null;
+        
     }
     
     [Rpc(RpcSources.All, RpcTargets.All)]
@@ -51,7 +53,7 @@ public class SelectManager : NetworkBehaviour
         RectTransform rectCard = myCard.GetComponent<RectTransform>();
         rectCard.anchorMin = new Vector2(0.5f, 0.5f);
         rectCard.anchorMax = new Vector2(0.5f, 0.5f);
-        cardScript.changeState(cardInfoPrefab.state.Played);
+        
         
 
     }
