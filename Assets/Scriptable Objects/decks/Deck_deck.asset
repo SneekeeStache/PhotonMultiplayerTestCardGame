@@ -17,9 +17,11 @@ MonoBehaviour:
   _description: deck de freez corleon
   _deckCards:
   - {fileID: 11400000, guid: f5c74e13b989e5846907414fde8618fc, type: 2}
+  - {fileID: 11400000, guid: f5c74e13b989e5846907414fde8618fc, type: 2}
+  - {fileID: 11400000, guid: e3297225010cfae47b56158f0b83393d, type: 2}
+  - {fileID: 11400000, guid: e3297225010cfae47b56158f0b83393d, type: 2}
+  - {fileID: 11400000, guid: 093c411d2b5df244588721a66d6d2ef3, type: 2}
+  - {fileID: 11400000, guid: 093c411d2b5df244588721a66d6d2ef3, type: 2}
   - {fileID: 11400000, guid: 97d6053f25c7a384bb6a4853f9e60f4f, type: 2}
   - {fileID: 11400000, guid: 97d6053f25c7a384bb6a4853f9e60f4f, type: 2}
-  - {fileID: 11400000, guid: 97d6053f25c7a384bb6a4853f9e60f4f, type: 2}
-  - {fileID: 11400000, guid: 97d6053f25c7a384bb6a4853f9e60f4f, type: 2}
-  - {fileID: 11400000, guid: 97d6053f25c7a384bb6a4853f9e60f4f, type: 2}
-  - {fileID: 11400000, guid: 97d6053f25c7a384bb6a4853f9e60f4f, type: 2}
+  - {fileID: 11400000, guid: adb6e41691e810948a9666d735ced787, type: 2}

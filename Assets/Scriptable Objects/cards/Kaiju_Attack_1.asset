@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf200631059bf784d92d771a66384017, type: 3}
-  m_Name: Bob
+  m_Name: Kaiju_Attack_1
   m_EditorClassIdentifier: 
-  id: 1
-  cardName: Billy
-  visual: {fileID: 21300000, guid: d60a2b408209c9a43b6e8ea347966c90, type: 3}
-  description: bweh
+  id: 2
+  cardName: Tir Meteor
+  visual: {fileID: 21300000, guid: 9a3c00c9a3c39c6449ea489502362cb4, type: 3}
+  description: 
